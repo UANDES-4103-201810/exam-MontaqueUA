@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+<% unless customer_signed_in? %>
+  <div>
+    <%= link_to('Sign in', new_customer_session_path) %> to order Pizza
+  </div>
+<% end %>
+<h1>Recipes</h1>
+
+<div class="flex-container">
+  <% @recipes.each do |recipe| %>
+      <div>
+        <div>
+          <%= recipe.name %>
+        </div>
+        <div>
+          <%= recipe.price %>
+        </div>
+        <div>
+          <%= image_tag('/assets/' + recipe.picture_file_name, height: '200', width: '200') %>
+        </div>
+        <div>
+          <% if customer_signed_in? %>
+            <%= link_to 'Order',  new_recipe_order_path(recipe) %>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
+<br>
+

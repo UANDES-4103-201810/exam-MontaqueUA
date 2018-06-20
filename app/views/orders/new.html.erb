@@ -1,0 +1,5 @@
+<h1>New Order</h1>
+<p>You selected <%= @recipe.name %> , it will be added to your order once you finish, but, 1st give us the address details of this order</p>
+<%= render 'form', order: @order %>
+
+<%= link_to 'Back', root_path %>
