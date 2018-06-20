@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @pizzas = @order.recipes
   end
 
   # GET /orders/new
@@ -25,12 +26,14 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @recipe = Recipe.find(order_params[:recipe_id])
+    @recipe = order_params[:recipe]
+    order_params[:customer] = current_customer
     @order = Order.new(order_params)
+    @pizza = OrderRecipe.new(recipe: @recipe, order: @order)
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
+         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }

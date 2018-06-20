@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.hidden_field :customer_id , :value => current_customer%>
+    <%= form.hidden_field :customer_id, value: current_customer.id%>
   </div>
 
   <div class="field">
-    <%= form.hidden_field :recipe_id, :value => @recipe.id %>
+    <%= form.hidden_field :recipe, value: @recipe %>
   </div>
 
   <div class="field">
